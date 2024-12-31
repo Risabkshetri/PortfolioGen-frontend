@@ -1,0 +1,147 @@
+'use client';
+
+import React, { useState } from 'react';
+import { 
+  Search, 
+  FileText, 
+  Coffee,
+  Rocket,
+  Wrench,
+  Shield,
+  ChevronRight
+} from 'lucide-react';
+
+export default function DocumentationPage() {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const docSections = [
+    {
+      title: 'Getting Started',
+      icon: Rocket,
+      articles: [
+        { title: 'Quick Start Guide', href: '#', timeToRead: '5 min' },
+        { title: 'Installation', href: '#', timeToRead: '3 min' },
+        { title: 'Basic Concepts', href: '#', timeToRead: '7 min' }
+      ]
+    },
+    {
+      title: 'Core Features',
+      icon: Wrench,
+      articles: [
+        { title: 'Portfolio Generation', href: '#', timeToRead: '6 min' },
+        { title: 'Customization Options', href: '#', timeToRead: '8 min' },
+        { title: 'Template System', href: '#', timeToRead: '5 min' }
+      ]
+    },
+    {
+      title: 'Advanced Usage',
+      icon: Shield,
+      articles: [
+        { title: 'Custom Components', href: '#', timeToRead: '10 min' },
+        { title: 'API Integration', href: '#', timeToRead: '12 min' },
+        { title: 'Performance Optimization', href: '#', timeToRead: '8 min' }
+      ]
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+      {/* Documentation Header */}
+      <div className="max-w-5xl mx-auto">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Documentation</h1>
+          <p className="text-lg text-gray-600 mb-8">
+            Everything you need to know about creating your portfolio
+          </p>
+          
+          {/* Search Bar */}
+          <div className="max-w-2xl mx-auto">
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <Search className="h-5 w-5 text-gray-400" />
+              </div>
+              <input
+                type="text"
+                placeholder="Search documentation..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl 
+                          text-sm placeholder-gray-500 focus:outline-none focus:ring-2 
+                          focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Quick Links */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          {['Platform Overview', 'API Reference', 'Examples'].map((item, index) => (
+            <button
+              key={index}
+              className="flex items-center justify-between p-4 bg-white rounded-xl 
+                        shadow-sm hover:shadow-md transition-shadow duration-200"
+            >
+              <span className="font-medium text-gray-900">{item}</span>
+              <ChevronRight className="w-5 h-5 text-gray-400" />
+            </button>
+          ))}
+        </div>
+
+        {/* Documentation Sections */}
+        <div className="space-y-12">
+          {docSections.map((section) => {
+            const Icon = section.icon;
+            return (
+              <div key={section.title}>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-2 bg-blue-50 rounded-lg">
+                    <Icon className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-gray-900">{section.title}</h2>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {section.articles.map((article, index) => (
+                    <a
+                      key={index}
+                      href={article.href}
+                      className="group p-6 bg-white rounded-xl shadow-sm hover:shadow-md 
+                              transition-all duration-200 border border-gray-100"
+                    >
+                      <div className="flex justify-between items-start mb-4">
+                        <FileText className="w-5 h-5 text-blue-600" />
+                        <span className="flex items-center text-sm text-gray-500">
+                          <Coffee className="w-4 h-4 mr-1" />
+                          {article.timeToRead}
+                        </span>
+                      </div>
+                      <h3 className="text-lg font-medium text-gray-900 group-hover:text-blue-600 
+                                  transition-colors mb-2">
+                        {article.title}
+                      </h3>
+                      <p className="text-sm text-gray-600">
+                        Learn more about {article.title.toLowerCase()} and how to implement it effectively.
+                      </p>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Help Section */}
+        <div className="mt-16 p-6 bg-blue-50 rounded-xl text-center">
+          <h2 className="text-xl font-bold text-gray-900 mb-2">Need More Help?</h2>
+          <p className="text-gray-600 mb-4">
+            Can't find what you're looking for? Get in touch with our support team.
+          </p>
+          <button className="inline-flex items-center justify-center px-6 py-3 
+                          border border-transparent text-base font-medium rounded-lg 
+                          text-white bg-blue-600 hover:bg-blue-700 transition-colors">
+            Contact Support
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
