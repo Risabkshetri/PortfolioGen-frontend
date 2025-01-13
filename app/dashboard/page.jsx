@@ -1,6 +1,8 @@
 'use client';
 import React, { useState } from 'react';
 import { UserButton } from '@clerk/nextjs';
+import { useAuth } from "@clerk/nextjs";
+import {redirect} from 'next/navigation';
 import { 
   LayoutDashboard, 
   BookOpen, 
@@ -15,6 +17,11 @@ import {
 
 export default function DashboardPage() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const { userId } = useAuth();
+  
+  if (!userId) {
+    redirect("/sign-in");
+  }
 
   const navItems = [
     { icon: LayoutDashboard, label: 'Overview', href: '/dashboard' },

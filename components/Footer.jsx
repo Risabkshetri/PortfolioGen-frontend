@@ -16,7 +16,7 @@ function Footer() {
     { icon: Facebook, href: '#', label: 'Facebook' }
   ];
   return (
-    <footer className="w-full sticky bottom-0 bg-white border-t border-gray-200">
+    <footer className="w-full fixed bottom-0 bg-white border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 py-6">
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           {/* Logo and Copyright */}

@@ -1,19 +1,30 @@
 'use client';
 
-import { useEffect } from "react";
-import { useUser } from "@clerk/nextjs";
+import { useEffect, useId } from "react";
+import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Sparkles, Shield, Zap } from "lucide-react";
 
 export default function Home() {
-  const { user } = useUser();
+  const { isLoaded, userId } = useAuth();
+
   const router = useRouter();
 
   useEffect(() => {
-    if (user) {
+    if (isLoaded && userId) {
       router.push("/dashboard");
     }
-  }, [user, router]);
+  }, [isLoaded, useId, router]);
+
+  if (!isLoaded) {
+    return (
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center bg-white rounded-lg shadow-md p-4">
+        <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-gray-900"></div>
+        <span className="ml-2 text-lg font-bold text-gray-900">Loading...</span>
+        <div className="absolute top-0 left-0 w-full h-full bg-gray-100 opacity-50 rounded-lg"></div>
+      </div>
+    )
+  }
 
   const handleClick = () => {
     router.push("/sign-in");
@@ -49,7 +60,7 @@ export default function Home() {
             <p className="text-xl text-gray-600 md:text-2xl">
               Stand out with a stunning portfolio website built in seconds
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <button onClick={handleClick} className="group bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 flex items-center gap-2">
                 Get Started Free
@@ -67,7 +78,7 @@ export default function Home() {
           <div className="container mx-auto px-4 py-16">
             <div className="grid md:grid-cols-3 gap-8">
               {features.map((feature, index) => (
-                <div 
+                <div
                   key={index}
                   className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200"
                 >
