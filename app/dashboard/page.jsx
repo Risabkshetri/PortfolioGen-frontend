@@ -18,6 +18,7 @@ import {
 export default function DashboardPage() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const { userId } = useAuth();
+  console.log(userId);
   
   if (!userId) {
     redirect("/sign-in");

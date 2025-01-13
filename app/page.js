@@ -14,7 +14,7 @@ export default function Home() {
     if (isLoaded && userId) {
       router.push("/dashboard");
     }
-  }, [isLoaded, useId, router]);
+  }, [isLoaded, userId, router]);
 
   if (!isLoaded) {
     return (
