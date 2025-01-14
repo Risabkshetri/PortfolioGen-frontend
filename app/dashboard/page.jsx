@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { UserButton } from '@clerk/nextjs';
 import { useAuth } from "@clerk/nextjs";
 import {redirect} from 'next/navigation';
@@ -18,12 +18,14 @@ import {
 export default function DashboardPage() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const { userId } = useAuth();
-  console.log(userId);
   
-  if (!userId) {
-    redirect("/sign-in");
-  }
-
+  useEffect(() => {
+    if (!userId) {
+      setTimeout(() => {
+        redirect("/sign-in");
+      }, 1000); // Wait for 1 second before redirecting
+    }
+  }, [userId]);
   const navItems = [
     { icon: LayoutDashboard, label: 'Overview', href: '/dashboard' },
     { icon: Boxes, label: 'Examples', href: '/dashboard/examples' },

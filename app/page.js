@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId } from "react";
+import { useEffect } from "react";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Sparkles, Shield, Zap } from "lucide-react";
@@ -18,10 +18,8 @@ export default function Home() {
 
   if (!isLoaded) {
     return (
-      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center bg-white rounded-lg shadow-md p-4">
-        <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-gray-900"></div>
-        <span className="ml-2 text-lg font-bold text-gray-900">Loading...</span>
-        <div className="absolute top-0 left-0 w-full h-full bg-gray-100 opacity-50 rounded-lg"></div>
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-purple-500"></div>
       </div>
     )
   }

@@ -22,7 +22,7 @@ function Footer() {
           {/* Logo and Copyright */}
           <div className="flex items-center space-x-4">
             <img 
-              src="images/logo.png" 
+              src="https://res.cloudinary.com/deht0dsks/image/upload/v1736830213/sub-logo1_fckuaf.jpg" 
               alt="Logo" 
               className="h-9 w-9 object-contain"
             />
