@@ -1,38 +1,3 @@
-// import { toast } from 'react-toastify';
-// import { api } from './downloadPortfolio';
-
-// export const savePortfolio = async (userData) => {
-//   const toastId = toast.loading('Submitting portfolio...');
-  
-//   try {
-//     const { data } = await api.post('/portfolio', userData);
-
-//     if (!data) {
-//       throw new Error('No data received');
-//     }
-
-//     toast.update(toastId, {
-//       render: 'Portfolio submitted successfully!',
-//       type: 'success',
-//       isLoading: false,
-//       autoClose: 3000,
-//     });
-
-//     return data;
-    
-//   } catch (error) {
-//     const errorMessage = error.response?.data?.error || error.message || 'Something went wrong';
-//     toast.update(toastId, {
-//       render: errorMessage,
-//       type: 'error',
-//       isLoading: false,
-//       autoClose: 5000,
-//     });
-    
-//     throw error;
-//   }
-// };
-
 import { toast } from 'react-toastify';
 import { api } from './downloadPortfolio';
 import { uploadImageToCloudinary } from './cloudinary';
