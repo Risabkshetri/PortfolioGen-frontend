@@ -1,42 +1,78 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Menu, Moon, Sun, X } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { useState } from 'react';
-import { usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [theme, setTheme] = useState('light');
   const pathname = usePathname();
   const isDashboard = pathname.startsWith('/dashboard');
-  
-  if(isDashboard){
+
+  useEffect(() => {
+    // Check for system preference and stored theme on mount
+    const storedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (storedTheme) {
+      setTheme(storedTheme);
+      document.documentElement.classList.toggle('dark', storedTheme === 'dark');
+    } else if (systemPrefersDark) {
+      setTheme('dark');
+      document.documentElement.classList.add('dark');
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+    document.documentElement.classList.toggle('dark');
+  };
+
+  if (isDashboard) {
     return null;
   }
+
   const NavItems = () => (
     <>
-      <Link href="/" className="hover:text-gray-500 transition-colors">
+      <Link 
+        href="/" 
+        className={`transition-colors hover:text-primary ${
+          pathname === '/' ? 'text-primary font-medium' : 'text-muted-foreground'
+        }`}
+      >
         Home
       </Link>
-      <Link href="/about" className="hover:text-gray-500 transition-colors">
+      <Link 
+        href="/about" 
+        className={`transition-colors hover:text-primary ${
+          pathname === '/about' ? 'text-primary font-medium' : 'text-muted-foreground'
+        }`}
+      >
         About
       </Link>
-      <Link href="/contact" className="hover:text-gray-500 transition-colors">
+      <Link 
+        href="/contact" 
+        className={`transition-colors hover:text-primary ${
+          pathname === '/contact' ? 'text-primary font-medium' : 'text-muted-foreground'
+        }`}
+      >
         Contact
       </Link>
     </>
   );
 
   return (
-    <nav className="sticky top-0 px-4 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center">
+    <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container mx-auto flex h-16 items-center px-4">
         {/* Logo */}
         <div className="mr-4 flex items-center space-x-2">
           <Link href="/" className="flex items-center space-x-2">
-            <span className="font-bold text-xl">PortfolioGen.</span>
+            <span className="text-xl font-bold text-primary">PortfolioGen.</span>
           </Link>
         </div>
 
@@ -53,40 +89,66 @@ const Navbar = () => {
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => setIsDarkMode(!isDarkMode)}
-            className="mr-2"
+            onClick={toggleTheme}
+            className="mr-2 hover:bg-accent hover:text-accent-foreground"
+            aria-label="Toggle theme"
           >
-            {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            {theme === 'dark' ? (
+              <Sun className="h-5 w-5 transition-transform hover:rotate-12" />
+            ) : (
+              <Moon className="h-5 w-5 transition-transform hover:-rotate-12" />
+            )}
           </Button>
 
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex md:items-center md:space-x-2">
             <Link href="/sign-in">
-              <Button variant="ghost">Login</Button>
+              <Button 
+                variant="ghost"
+                className="hover:bg-accent hover:text-accent-foreground"
+              >
+                Login
+              </Button>
             </Link>
             <Link href="/sign-up">
-              <Button>Sign up</Button>
+              <Button 
+                className="bg-primary text-primary-foreground hover:bg-primary/90"
+              >
+                Sign up
+              </Button>
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon">
+              <Button 
+                variant="ghost" 
+                size="icon"
+                className="hover:bg-accent hover:text-accent-foreground"
+              >
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-64">
+            <SheetContent 
+              side="right" 
+              className="w-64 border-l border-border bg-background"
+            >
               <div className="flex flex-col space-y-4 mt-6">
                 <NavItems />
                 <div className="flex flex-col space-y-2 mt-4">
                   <Link href="/sign-in">
-                    <Button className="w-full" variant="ghost">
+                    <Button 
+                      className="w-full hover:bg-accent hover:text-accent-foreground" 
+                      variant="ghost"
+                    >
                       Login
                     </Button>
                   </Link>
                   <Link href="/sign-up">
-                    <Button className="w-full">
+                    <Button 
+                      className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                    >
                       Sign up
                     </Button>
                   </Link>

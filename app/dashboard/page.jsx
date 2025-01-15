@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { UserButton } from '@clerk/nextjs';
 import { useAuth } from "@clerk/nextjs";
 import {redirect} from 'next/navigation';
+
+
 import { 
   LayoutDashboard, 
   BookOpen, 
@@ -18,6 +20,7 @@ import {
 export default function DashboardPage() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const { userId } = useAuth();
+ 
   
   useEffect(() => {
     if (!userId) {
@@ -26,6 +29,7 @@ export default function DashboardPage() {
       }, 1000); // Wait for 1 second before redirecting
     }
   }, [userId]);
+
   const navItems = [
     { icon: LayoutDashboard, label: 'Overview', href: '/dashboard' },
     { icon: Boxes, label: 'Examples', href: '/dashboard/examples' },
@@ -41,27 +45,26 @@ export default function DashboardPage() {
   ];
 
   return (
-    <div className="min-h-dvh bg-gray-50">
+    <div className={`min-h-dvh bg-gray-800 text-gray-300 dark:bg-gray-900 dark:text-gray-400`}>
       {/* Mobile Sidebar Overlay */}
       {isSidebarOpen && (
         <div 
-          className="fixed inset-0 bg-gray-800/50 z-40 lg:hidden"
+          className={`fixed inset-0 bg-gray-900/50 dark:bg-gray-800/50 z-40 lg:hidden`}
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
       {/* Sidebar */}
-      <aside className={`
-        min-h-screen fixed top-0 left-0 z-50 h-full w-72 bg-white border-r border-gray-200 
-        transform transition-transform duration-200 ease-in-out flex flex-col
-        ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-        lg:translate-x-0 lg:static lg:z-0
+      <aside className={`min-h-screen fixed top-0 left-0 z-50 h-full w-72 bg-gray-700 border-r border-gray-600 dark:bg-gray-800 dark:border-r dark:border-gray-700 
+      transform transition-transform duration-200 ease-in-out flex flex-col
+      ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+      lg:translate-x-0 lg:static lg:z-0
       `}>
         {/* Brand Logo */}
-        <div className="p-4 border-b border-gray-200">
+        <div className={`p-4 border-b border-gray-200 bg-gray-600 dark:bg-gray-700`}>
           <div className="flex items-center">
-            <Zap className="h-8 w-8 text-blue-600" />
-            <span className="ml-2 text-xl font-bold text-gray-900">KshetriAI</span>
+            <Zap className={`h-8 w-8 text-blue-400 dark:text-blue-500`} />
+            <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">KshetriAI</span>
           </div>
         </div>
 
@@ -73,9 +76,9 @@ export default function DashboardPage() {
               <a
                 key={item.label}
                 href={item.href}
-                className="flex items-center gap-3 px-4 py-2.5 text-gray-600 rounded-lg hover:bg-gray-50 hover:text-gray-900 group transition-colors"
+                className={`flex items-center gap-3 px-4 py-2.5 text-gray-600 rounded-lg hover:bg-gray-50 hover:text-gray-900 group transition-colors dark:text-gray-500 dark:hover:bg-gray-800 dark:hover:text-gray-300`}
               >
-                <Icon className="w-5 h-5 group-hover:text-blue-600" />
+                <Icon className={`w-5 h-5 group-hover:text-blue-600 dark:group-hover:text-blue-500`} />
                 <span className="font-medium">{item.label}</span>
               </a>
             );
@@ -83,12 +86,12 @@ export default function DashboardPage() {
         </nav>
 
         {/* User Profile Section */}
-        <div className="border-t border-gray-200 p-4">
-          <div className="flex items-center gap-3 px-4 py-2 rounded-lg bg-gray-50">
+        <div className={`border-t border-gray-200 p-4 bg-gray-600 dark:bg-gray-700`}>
+          <div className="flex items-center gap-3 px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-700">
             <UserButton afterSignOutUrl="/" />
             <div className="flex-grow">
-              <div className="text-sm font-medium text-gray-900">Your Profile</div>
-              <div className="text-xs text-gray-500">Manage your account</div>
+              <div className="text-sm font-medium text-gray-900 dark:text-white">Your Profile</div>
+              <div className="text-xs text-gray-500 dark:text-gray-400">Manage your account</div>
             </div>
           </div>
         </div>
@@ -97,13 +100,13 @@ export default function DashboardPage() {
       {/* Main Content Wrapper */}
       <div className="lg:pl-72">
         {/* Top Navigation */}
-        <nav className="bg-white border-b border-gray-200 fixed right-0 left-0 top-0 lg:left-72 z-30">
+        <nav className={`bg-white border-b border-gray-200 fixed right-0 left-0 top-0 lg:left-72 z-30 bg-gray-700 border-gray-600 dark:bg-gray-800 dark:border-gray-700`}>
           <div className="px-4">
             <div className="flex h-16 items-center justify-between">
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setSidebarOpen(!isSidebarOpen)}
-                className="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                className={`lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-500 dark:hover:bg-gray-800 dark:hover:text-gray-300`}
               >
                 {isSidebarOpen ? (
                   <X className="h-6 w-6" />
@@ -120,8 +123,8 @@ export default function DashboardPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 ">
             {/* Welcome Section */}
             <div className="mb-8">
-              <h1 className="text-3xl font-bold text-gray-900">Welcome to Your Dashboard</h1>
-              <p className="mt-2 text-gray-600">Let's create something amazing today</p>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Welcome to Your Dashboard</h1>
+              <p className="mt-2 text-gray-600 dark:text-gray-400">Let's create something amazing today</p>
             </div>
 
             {/* Quick Actions Grid */}
@@ -129,16 +132,16 @@ export default function DashboardPage() {
               {quickActions.map((action, index) => (
                 <button
                   key={index}
-                  className="p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 text-left group"
+                  className={`p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 text-left group dark:bg-gray-700 dark:hover:bg-gray-600`}
                 >
                   <div className="flex justify-between items-start">
                     <div>
-                      <h3 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                      <h3 className="font-semibold text-gray-900 group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-500">
                         {action.label}
                       </h3>
-                      <p className="mt-2 text-sm text-gray-600">{action.description}</p>
+                      <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{action.description}</p>
                     </div>
-                    <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition-colors" />
+                    <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 dark:text-gray-500 dark:group-hover:text-blue-400" />
                   </div>
                 </button>
               ))}
