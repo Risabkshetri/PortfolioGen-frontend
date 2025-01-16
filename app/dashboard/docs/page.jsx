@@ -15,7 +15,7 @@ export default function DocumentationPage() {
   const headerSections = [
     { title: "Platform Overview", link: "/dashboard" },
     { title: "API Reference", link: "#" },
-    { title: "Examples", link: "/examples" }
+    { title: "Examples", link: "./examples" }
   ];
 
   const docSections = [
