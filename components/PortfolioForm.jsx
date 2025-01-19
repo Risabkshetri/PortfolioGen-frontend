@@ -172,7 +172,7 @@ function PortfolioForm() {
         tagline: formData.role,
         about: formData.about,
         aboutImgUrl: formData.aboutPhoto,
-        cv: formData.cv,
+        cv: 'not available',
         skills: formData.skills.split(',').filter(Boolean).map(skill => skill.trim()),
         aboutSkill: formData.skillAbout,
         yearOfExperience: formData.yearOfExperience,
@@ -180,6 +180,7 @@ function PortfolioForm() {
       });
     }
   }, [formData, user]);
+
   console.log(userData);
 
   const resetForm = () => {

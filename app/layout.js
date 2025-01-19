@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "PortfolioGen",
-  description: "Builder you own portfolio within the a minutes.",
+  description: "Build your own portfolio within a minutes.",
 };
 
 

@@ -23,7 +23,7 @@ export default function DocumentationPage() {
       title: 'Getting Started',
       icon: Rocket,
       articles: [
-        { title: 'Quick Start Guide', href: '#', timeToRead: '5 min' },
+        { title: 'Quick Start Guide', href: './docs/basic-guide', timeToRead: '5 min' },
         { title: 'Installation', href: '#', timeToRead: '3 min' },
         { title: 'Basic Concepts', href: '#', timeToRead: '7 min' }
       ]

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { UserButton } from '@clerk/nextjs';
 import { useAuth } from "@clerk/nextjs";
 import {redirect} from 'next/navigation';
+import Link from 'next/link';
 
 
 import { 
@@ -39,9 +40,9 @@ export default function DashboardPage() {
   ];
 
   const quickActions = [
-    { label: 'New Portfolio', description: 'Create a new portfolio from scratch' },
-    { label: 'Import Project', description: 'Import from GitHub repository' },
-    { label: 'View Templates', description: 'Browse our template collection' }
+    { label: 'New Portfolio', href:"/dashboard/generate-portfolio",  description: 'Create a new portfolio from scratch' },
+    { label: 'Import Project', href:"#", description: 'Import from GitHub repository' },
+    { label: 'View Templates', href:"#", description: 'Browse our template collection' }
   ];
 
   return (
@@ -139,7 +140,8 @@ export default function DashboardPage() {
           {/* Quick Actions Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             {quickActions.map((action, index) => (
-              <button
+              <Link
+                href={action.href}
                 key={index}
                 className="p-6 bg-white/80 backdrop-blur-sm rounded-xl shadow-sm 
                   hover:shadow-md hover:bg-white/90 transition-all duration-200 text-left group
@@ -156,7 +158,7 @@ export default function DashboardPage() {
                   <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-500 transition-colors duration-200
                     dark:text-gray-500 dark:group-hover:text-blue-400" />
                 </div>
-              </button>
+              </Link>
             ))}
           </div>
         </div>

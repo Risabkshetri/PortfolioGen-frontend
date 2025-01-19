@@ -8,28 +8,28 @@ const ExamplesPage = () => {
       title: "Minimalist Developer Portfolio",
       description: "Clean and modern design focused on showcasing code projects",
       category: "Developer",
-      stars: 245,
-      users: 1.2+'k',
-      image: "/api/placeholder/600/400",
-      link: "/templates/minimalist-dev"
+      views: 245,
+      users: 102,
+      image: "https://res.cloudinary.com/deht0dsks/image/upload/v1737298039/video_thumnail_yx9w5k.png",
+      link: "https://manmohanbio.netlify.app/"
     },
     {
       title: "Creative Designer Showcase",
       description: "Visual-heavy layout perfect for designers and artists",
       category: "Designer",
-      stars: 189,
-      users: 956,
-      image: "/api/placeholder/600/400",
-      link: "/templates/designer"
+      views: 189,
+      users: 116,
+      image: "https://res.cloudinary.com/deht0dsks/image/upload/v1737298040/Productivity_2_tcdvls.png",
+      link: "https://manmohanbio.netlify.app/"
     },
     {
       title: "Professional Business Portfolio",
       description: "Corporate style template for business professionals",
       category: "Business",
-      stars: 167,
-      users: 834,
-      image: "/api/placeholder/600/400",
-      link: "/templates/business"
+      views: 167,
+      users: 134,
+      image: "https://res.cloudinary.com/deht0dsks/image/upload/v1728792955/samples/balloons.jpg",
+      link: "https://manmohanbio.netlify.app/"
     }
   ];
 
